@@ -1,0 +1,4 @@
+INSERT INTO logins(username,password,expired ,active)   VALUES
+   ('tobasaqueue', 'A1410C6E07BDA0D774A76E644024801EB00175B27B85D0289469978603EBB9F4','2025-01-01 00:00:00.000',1),
+   ('admin',       'adminOke123','2025-01-01 00:00:00.000',1),
+   ('082255985321',       '123456','2025-01-01 00:00:00.000',1);

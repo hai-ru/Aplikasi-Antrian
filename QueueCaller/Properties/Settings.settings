@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Tobasa.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="QueueServerHost" Type="System.String" Scope="User">
+      <Value Profile="(Default)">127.0.0.1</Value>
+    </Setting>
+    <Setting Name="QueueServerPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2345</Value>
+    </Setting>
+    <Setting Name="StationName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">CALL#1</Value>
+    </Setting>
+    <Setting Name="StationPost" Type="System.String" Scope="User">
+      <Value Profile="(Default)">POST0</Value>
+    </Setting>
+    <Setting Name="SecuritySalt" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C4BC3A3AC2D6D367A74580388B20BC069C96B048DFEAF5CCDC0CE1E25BF23F39</Value>
+    </Setting>
+    <Setting Name="QueueUserName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">tobasaqueue</Value>
+    </Setting>
+    <Setting Name="QueuePassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">e4ee0e54215f5e3dd7683923abe1dac8</Value>
+    </Setting>
+    <Setting Name="ManageAllPostAdvanceQueue" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ManageAdvanceQueue" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ShowPostsButtonDiv" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="UIPostList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;string&gt;POST0|Apotik&lt;/string&gt;
+  &lt;string&gt;POST1|Laboratorium&lt;/string&gt;
+  &lt;string&gt;POST2|Pendaftaran RJ&lt;/string&gt;
+  &lt;string&gt;POST3|BPJS Kesehatan&lt;/string&gt;
+  &lt;string&gt;POST4|Customer Service&lt;/string&gt;
+  &lt;string&gt;POST5|Poli Gigi&lt;/string&gt;
+  &lt;string&gt;POST6|Poli Anak&lt;/string&gt;
+  &lt;string&gt;POST7|Poli Mata&lt;/string&gt;
+  &lt;string&gt;POST8|Poli Kulit&lt;/string&gt;
+  &lt;string&gt;POST9|Poli THT&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

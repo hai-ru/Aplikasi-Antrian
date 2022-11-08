@@ -1,0 +1,6 @@
+CREATE TABLE "sms_config" (
+	"id"	INTEGER NOT NULL,
+	"endpoints"	TEXT NOT NULL,
+	"port"	TEXT NOT NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
