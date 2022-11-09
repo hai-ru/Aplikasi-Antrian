@@ -246,7 +246,7 @@ namespace Tobasa
             {
                 stringMessage = stringMessage.Trim();
                 stringMessage = stringMessage.Trim('\0');
-                Console.WriteLine("[Received message] " + stringMessage);
+                //Console.WriteLine("[Received message] " + stringMessage);
                 HandleMessage(arg, stringMessage);
                 return;
             }
@@ -313,10 +313,13 @@ namespace Tobasa
             if (client == null)
                 return;
 
+
             if (!client.LoggedIn)
             {
                 if (message.StartsWith(Msg.SysLogin.Text + Msg.Separator + "REQ"))
                 {
+                    //Console.WriteLine("handlemessage >> " + message);
+
                     // Handle SysLogin
                     HandleLogin(arg, client);
                 }
@@ -358,10 +361,13 @@ namespace Tobasa
         private void HandleLogin(DataReceivedEventArgs arg, Client client)
         {
             Exception exp = null;
+
             try
             {
                 Message qmessage = new Message(arg);
                 Logger.Log("[QueueServer] Processing " + qmessage.MessageType.String + " from " + arg.RemoteInfo);
+
+                //Console.WriteLine("rawmessage >> "+qmessage.RawMessage);
 
                 string module   = qmessage.PayloadValues["module"];
                 string post     = qmessage.PayloadValues["post"];
@@ -384,8 +390,12 @@ namespace Tobasa
                     if (QueueRepository.CanLogin(client.Name, client.Post, out reason))
                     {
                         if (QueueRepository.Login(client.UserName, client.Password, out reason))
+                        {
                             allowed = true;
+                        }
                     }
+
+                    //Console.WriteLine("reason return >> " + reason);
 
                     if (allowed)
                     {
@@ -402,7 +412,9 @@ namespace Tobasa
                             Msg.CompDelimiter + client.UserName +
                             Msg.CompDelimiter + client.Password +
                             Msg.CompDelimiter + post +
-                            Msg.CompDelimiter + station;
+                            Msg.CompDelimiter + station + reason;
+
+                        //Console.WriteLine("login return >> "+message);
 
                         client.Session.Send(message);
 

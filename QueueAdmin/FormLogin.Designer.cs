@@ -53,6 +53,8 @@ namespace Tobasa
             this.chkActive = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dtExpired = new System.Windows.Forms.DateTimePicker();
+            this.labelPost = new System.Windows.Forms.Label();
+            this.comboBoxPost = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -102,7 +104,7 @@ namespace Tobasa
             this.panel1.Controls.Add(this.btnChangePassword);
             this.panel1.Controls.Add(this.btnAction);
             this.panel1.Controls.Add(this.btnClose);
-            this.panel1.Location = new System.Drawing.Point(0, 171);
+            this.panel1.Location = new System.Drawing.Point(0, 234);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(445, 40);
             this.panel1.TabIndex = 9;
@@ -163,12 +165,32 @@ namespace Tobasa
             this.dtExpired.Size = new System.Drawing.Size(200, 20);
             this.dtExpired.TabIndex = 4;
             // 
+            // labelPost
+            // 
+            this.labelPost.AutoSize = true;
+            this.labelPost.Location = new System.Drawing.Point(22, 143);
+            this.labelPost.Name = "labelPost";
+            this.labelPost.Size = new System.Drawing.Size(59, 13);
+            this.labelPost.TabIndex = 14;
+            this.labelPost.Text = "Post Name";
+            // 
+            // comboBoxPost
+            // 
+            this.comboBoxPost.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxPost.FormattingEnabled = true;
+            this.comboBoxPost.Location = new System.Drawing.Point(120, 140);
+            this.comboBoxPost.Name = "comboBoxPost";
+            this.comboBoxPost.Size = new System.Drawing.Size(311, 21);
+            this.comboBoxPost.TabIndex = 15;
+            // 
             // FormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(443, 208);
+            this.ClientSize = new System.Drawing.Size(443, 271);
+            this.Controls.Add(this.comboBoxPost);
+            this.Controls.Add(this.labelPost);
             this.Controls.Add(this.dtExpired);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.chkActive);
@@ -205,5 +227,7 @@ namespace Tobasa
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dtExpired;
         private System.Windows.Forms.Button btnChangePassword;
+        private System.Windows.Forms.Label labelPost;
+        private System.Windows.Forms.ComboBox comboBoxPost;
     }
 }

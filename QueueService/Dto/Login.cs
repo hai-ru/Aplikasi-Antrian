@@ -30,5 +30,7 @@ namespace Tobasa.Dto
         public string Password { get; set; }
         public DateTime Expired { get; set; }
         public bool Active { get; set; }
+        public string PostName { get; set; }
+
     }
 }

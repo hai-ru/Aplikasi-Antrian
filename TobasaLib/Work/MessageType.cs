@@ -398,11 +398,12 @@ namespace Tobasa
             Left    : Total waiting queue
         */
         public static readonly Type CallerGetInfo = 
-            CreateType("CALLER", "GET_INFO", "CallerGetInfo", 5, 4, 1, 3)
+            CreateType("CALLER", "GET_INFO", "CallerGetInfo", 5, 4, 1, 4)
                 .AddRequestPayload(0, "post")
                 .AddResultPayload(0, "postprefix")
                 .AddResultPayload(1, "number")
-                .AddResultPayload(2, "numberleft");
+                .AddResultPayload(2, "numberleft")
+                .AddResultPayload(3, "postname");
 
 
         /** Get next waiting number , issued by Modul Caller
@@ -416,12 +417,13 @@ namespace Tobasa
             Left    : Total waiting queue
         */
         public static readonly Type CallerGetNext = 
-            CreateType("CALLER", "GET_NEXT", "CallerGetNext", 5, 4, 2, 3)
+            CreateType("CALLER", "GET_NEXT", "CallerGetNext", 5, 4, 2, 4)
                 .AddRequestPayload(0, "post")
                 .AddRequestPayload(1, "station")
                 .AddResultPayload(0, "postprefix")
                 .AddResultPayload(1, "number")
-                .AddResultPayload(2, "numberleft");
+                .AddResultPayload(2, "numberleft")
+                .AddResultPayload(3, "postname");
 
 
         /** Recall current number , issued by Modul Caller

@@ -286,7 +286,9 @@ namespace Tobasa
             {
                 Message qmessage = new Message(arg);
 
-                Logger.Log("[QueueCaller] Processing " + qmessage.MessageType.String + " from " + arg.Session.RemoteInfo);
+                Logger.Log("[QueueCaller] Processing " + qmessage.MessageType.String + " from " + arg.Session.RemoteInfo+" message :"+qmessage.RawMessage);
+
+                if (qmessage.RawMessage == "" || qmessage.RawMessage == null) return;
 
                 // Handle SysLogin
                 if (qmessage.MessageType == Msg.SysLogin && qmessage.Direction == MessageDirection.RESPONSE)
@@ -317,6 +319,9 @@ namespace Tobasa
                     string prefix      = qmessage.PayloadValues["postprefix"];
                     string number      = qmessage.PayloadValues["number"];
                     string numberleft  = qmessage.PayloadValues["numberleft"];
+                    string postname = qmessage.PayloadValues["postname"];
+
+                    lblPost.Text = postname;
 
                     if (string.IsNullOrWhiteSpace(number))
                     {
@@ -373,6 +378,7 @@ namespace Tobasa
                 }
                 else
                 {
+                    //Console.WriteLine();
                     Logger.Log(string.Format("[QueueCaller] Unhandled message from: {0} - MSG: {1} ", arg.RemoteInfo, qmessage.RawMessage));
                 }
             }
@@ -1009,6 +1015,11 @@ namespace Tobasa
                 }
             }
 
+        }
+
+        private void btnRefreshing_Click(object sender, EventArgs e)
+        {
+            GetQueuetInfo();
         }
     }
 }

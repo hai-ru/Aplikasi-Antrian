@@ -52,6 +52,13 @@ namespace Tobasa
             return canLogin;
         }
 
+        public static string SafeGetString(DbDataReader reader, int colIndex)
+        {
+            if (!reader.IsDBNull(colIndex))
+                return reader.GetString(colIndex);
+            return string.Empty;
+        }
+
         public static bool Login(string userName, string password, out string reasonOut)
         {
             bool ok = false;
@@ -59,7 +66,9 @@ namespace Tobasa
 
             if (Database.Me.Connected)
             {
-                string sql = "SELECT username, password, expired, active FROM logins WHERE username = ?";
+                string sql = "SELECT username, password, expired, active, postname, posts.numberprefix, posts.keterangan as prefix FROM logins LEFT JOIN posts ON logins.postname = posts.name WHERE username = ?";
+                
+
                 try
                 {
                     Database.Me.OpenConnection();
@@ -74,10 +83,19 @@ namespace Tobasa
                             {
                                 reader.Read();
 
+                                
+
                                 string user = reader.GetString(0).Trim();
                                 string pwd = reader.GetString(1).Trim();
                                 DateTime expired = reader.GetDateTime(2);
                                 bool active = reader.GetBoolean(3);
+
+                                string postname = SafeGetString(reader,4);
+                                string numberprefix = SafeGetString(reader, 5);
+                                string keterangan = SafeGetString(reader, 6);
+
+                                //if (reader.GetString(5)) numberprefix = reader.GetString(5).Trim();
+
 
                                 if (!active)
                                 {
@@ -96,7 +114,7 @@ namespace Tobasa
                                 }
                                 else if (pwd.Equals(password))
                                 {
-                                    reason = "Succesfully Logged in";
+                                    reason = postname +"!"+ numberprefix +"!"+ keterangan ;
                                     ok = true;
                                 }
                             }
@@ -458,7 +476,7 @@ namespace Tobasa
                 Dto.Login login = (Dto.Login)JsonConvert.DeserializeObject(jsonData, (typeof(Dto.Login)));
                 bool insertData = command == "INSERT";
 
-                Console.WriteLine(login);
+                
 
                 if (Database.Me.Connected)
                 {
@@ -479,7 +497,7 @@ namespace Tobasa
                     if (command == "INSERT")
                     {
                         //newPasswordHash = Util.GetPasswordHash(newClearPass, newuserName);
-                        sql = "INSERT INTO logins (username, password, expired, active) VALUES (?,?,?,?)";
+                        sql = "INSERT INTO logins (username, password, expired, active, postname) VALUES (?,?,?,?,?)";
                     }
                     else if (command == "UPDATE_PASSWORD")
                     {
@@ -488,7 +506,7 @@ namespace Tobasa
                     }
                     else
                     {
-                        sql = "UPDATE logins SET expired = ?, active = ? WHERE username = ?";
+                        sql = "UPDATE logins SET expired = ?, active = ?, postname = ? WHERE username = ?";
                     }
 
                     Database.Me.OpenConnection();
@@ -524,6 +542,13 @@ namespace Tobasa
                             param.Value = login.Active;
                             param.DbType = System.Data.DbType.Boolean;
                             cmd.Parameters.Add(param);
+
+                            param = cmd.CreateParameter();
+                            param.ParameterName = "postname";
+                            param.Value = login.PostName;
+                            param.DbType = System.Data.DbType.String;
+                            cmd.Parameters.Add(param);
+
                         }
                         else if (command == "UPDATE_PASSWORD")
                         {
@@ -572,11 +597,20 @@ namespace Tobasa
                             cmd.Parameters.Add(param);
 
                             param = cmd.CreateParameter();
+                            param.ParameterName = "postname";
+                            param.Value = login.PostName;
+                            param.DbType = System.Data.DbType.String;
+                            cmd.Parameters.Add(param);
+
+                            param = cmd.CreateParameter();
                             param.ParameterName = "username";
                             param.Value = login.UsernameOld;
                             param.DbType = System.Data.DbType.String;
                             cmd.Parameters.Add(param);
                         }
+
+                        //Console.WriteLine(cmd.CommandText);
+                        //Console.WriteLine(login.PostName);
 
                         affected = cmd.ExecuteNonQuery();
                         return affected > 0;
@@ -653,7 +687,7 @@ namespace Tobasa
                     Database.Me.OpenConnection();
                     using (DbCommand cmd = Database.Me.Connection.CreateCommand())
                     {
-                        Console.WriteLine(sql);
+                        //Console.WriteLine(sql);
                         cmd.CommandText = sql;
                         cmd.ExecuteNonQuery();
 
@@ -1022,7 +1056,8 @@ namespace Tobasa
             {
                 try
                 {
-                    string sql = string.Format("SELECT name, post, canlogin, keterangan FROM stations ORDER BY name");
+                    //string sql = string.Format("SELECT name, post, canlogin, posts.keterangan as keterangan FROM stations LEFT JOIN posts ON stations.post = posts.name ORDER BY name");
+                    string sql = string.Format("SELECT stations.name, post, canlogin, stations.keterangan, posts.keterangan as keterangan_post FROM stations LEFT JOIN posts ON stations.post = posts.name ORDER BY stations.name");
                     sql += Database.Me.GetOffsetLimit(offset, limit);
 
                     Database.Me.OpenConnection();
@@ -1076,7 +1111,7 @@ namespace Tobasa
             {
                 try
                 {
-                    string sql = string.Format("SELECT username, password, expired, active FROM logins ORDER BY username");
+                    string sql = string.Format("SELECT username, password, expired, active, postname FROM logins ORDER BY username");
                     sql += Database.Me.GetOffsetLimit(offset, limit);
 
                     Database.Me.OpenConnection();
@@ -1471,7 +1506,8 @@ namespace Tobasa
                 {
                     string post = parameter["post"];
                     string station = parameter["station"];
-                    string sql = @"SELECT id, number, status, station, post, source, starttime, endtime, numberleft, numbermax FROM v_sequences WHERE post = ?";
+                    //string sql = @"SELECT id, number, status, station, post, source, starttime, endtime, numberleft, numbermax FROM v_sequences WHERE post = ?";
+                    string sql = @"SELECT id, number, status, station, post, source, starttime, endtime, numberleft, numbermax, posts.name as postname, posts.numberprefix FROM v_sequences LEFT JOIN posts ON v_sequences.post = posts.name WHERE post = ?";
 
                     Database.Me.OpenConnection();
                     using (DbCommand cmdSelect = Database.Me.Connection.CreateCommand())
@@ -1488,6 +1524,8 @@ namespace Tobasa
                                 int affectedRows = 0;
 
                                 reader.Read();
+
+                                //Console.WriteLine("GetWaitingNumberAndPostSummary >> "+reader.FieldCount);
 
                                 int id = reader.GetInt32(0);
                                 int number = reader.GetInt32(1);
@@ -1707,7 +1745,7 @@ namespace Tobasa
                 {
                     using (DbCommand cmdSelect = Database.Me.Connection.CreateCommand())
                     {
-                        string sqlSecond = @"SELECT id, number, status, station, post, source, starttime, endtime, numberleft, numbermax FROM v_sequences WHERE post = ?";
+                        string sqlSecond = @"SELECT id, number, status, station, post, source, starttime, endtime, numberleft, numbermax, posts.keterangan as postketerangan FROM v_sequences INNER JOIN posts on v_sequences.post = posts.name WHERE post = ?";
 
                         cmdSelect.CommandText = sqlSecond;
 
@@ -1822,6 +1860,10 @@ namespace Tobasa
                         // Get Post Prefix number
                         string postNumberPrefix = GetPostNumberPrefix(post);
 
+                        var dataPost = postNumberPrefix.Split('!');
+                        postNumberPrefix = dataPost[0];
+
+
                         string insertSQL;
                         if (Database.Me.ProviderType == ProviderType.SQLITE)
                         {
@@ -1881,6 +1923,8 @@ namespace Tobasa
 
                                             cmdInsertJob.ExecuteNonQuery();
                                         }
+
+                                        
 
                                         Dictionary<string, string> result = new Dictionary<string, string>()
                                         {
@@ -2032,7 +2076,7 @@ namespace Tobasa
         {
             if (Database.Me.Connected)
             {
-                string sql = "SELECT numberprefix FROM posts WHERE name = ?";
+                string sql = "SELECT numberprefix,keterangan FROM posts WHERE name = ?";
 
                 try
                 {
@@ -2042,13 +2086,30 @@ namespace Tobasa
                         cmd.CommandText = sql;
                         Database.Me.AddParameter(cmd, "name", post, DbType.String);
 
-                        var res = cmd.ExecuteScalar();
-                        if (res != null && res.ToString().Length > 0)
+                        using (DbDataReader reader = cmd.ExecuteReader())
                         {
-                            string prefix = res.ToString();
-                            prefix = prefix.Trim();
-                            return prefix;
+                            reader.Read();
+
+                            if (reader.HasRows)
+                            {
+                                string prefix = SafeGetString(reader, 0);
+                                string keterangan = SafeGetString(reader, 1);
+
+                                return prefix+"!"+keterangan;
+                            }
+                            else
+                            {
+                                return String.Empty;
+                            }
+
                         }
+                        //var res = cmd.ExecuteScalar();
+                        //if (res != null && res.ToString().Length > 0)
+                        //{
+                        //    string prefix = res.ToString();
+                        //    prefix = prefix.Trim();
+                        //    return prefix;
+                        //}
                     }
                 }
                 catch (Exception ex)

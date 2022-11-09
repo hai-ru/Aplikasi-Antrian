@@ -22,9 +22,11 @@ using System;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Data;
 
 namespace Tobasa
 {
+
     public partial class FormLogin : Form
     {
         #region Member variables
@@ -34,6 +36,21 @@ namespace Tobasa
         private bool _insertMode = false;
         private bool _changingPassword = false;
         Dictionary<string, string> _initialData;
+        internal DataTable postData;
+
+        //public DataTable postData { get; internal set; }
+
+        public class ComboboxItem
+        {
+            public string Text { get; set; }
+            public string Value { get; set; }
+
+            public override string ToString()
+            {
+                return Text;
+            }
+
+        }
 
         #endregion
 
@@ -69,6 +86,19 @@ namespace Tobasa
 
         private void OnFormLoad(object sender, EventArgs e)
         {
+            //MessageBox.Show(postData.Rows.Count.ToString());
+            if (postData != null && postData?.Rows.Count > 0)
+            {
+                foreach (DataRow row in postData.Rows)
+                {
+                    ComboboxItem item = new ComboboxItem();
+                    item.Text = row["name"].ToString() +" ("+ row["keterangan"].ToString() +")";
+                    item.Value = row["name"].ToString();
+
+                    comboBoxPost.Items.Add(item);
+                }
+            }
+
             if (!_insertMode && _initialData.Count > 0)
             {
                 txtUser.Text        = _initialData["username"];
@@ -76,6 +106,11 @@ namespace Tobasa
                 //curPassword       = _initialData["password"];   // save current password
                 dtExpired.Value     = Convert.ToDateTime(_initialData["expired"]);
                 chkActive.Checked   = Convert.ToBoolean(Convert.ToInt32(_initialData["active"]));
+
+                string postname = _initialData["postname"];
+                comboBoxPost.SelectedIndex = comboBoxPost.FindString(postname);
+
+                //Combox1.SelectedIndex = Combox1.FindStringExact("test1");
             }
             else if (_insertMode)
             {
@@ -98,7 +133,7 @@ namespace Tobasa
         {
         }
 
-        private void InsertUpdateDataLogin(string username, string password, DateTime expired, bool active)
+        private void InsertUpdateDataLogin(string username, string password, DateTime expired, bool active, string postName)
         {
 
             if (_mainForm.TcpClient != null && _mainForm.TcpClient.Connected)
@@ -133,7 +168,8 @@ namespace Tobasa
                     Username = username,
                     Password = password,
                     Expired  = expired,
-                    Active   = active
+                    Active   = active,
+                    PostName= postName
                 };
 
                 string jsonLogin = JsonConvert.SerializeObject(login, Formatting.None);
@@ -226,7 +262,9 @@ namespace Tobasa
                 //newPasswordHash = Util.GetPasswordHash(newClearPass, newuserName);
                 newPasswordHash = newClearPass;
 
-                InsertUpdateDataLogin(newuserName, newPasswordHash, dtExpired.Value, chkActive.Checked);
+                string postName = (comboBoxPost.SelectedItem as dynamic).Value;
+
+                InsertUpdateDataLogin(newuserName, newPasswordHash, dtExpired.Value, chkActive.Checked, postName );
 
                 // TODO: Remove DataChanged event, since MainForm now update 
                 // relevant grid in its HandleMessage method
@@ -253,5 +291,6 @@ namespace Tobasa
                 txtPassword.Text     = "";
             }
         }
+
     }
 }

@@ -60,7 +60,6 @@ namespace Tobasa
             this.capNext = new System.Windows.Forms.Label();
             this.lblStation = new System.Windows.Forms.Label();
             this.lblPost = new System.Windows.Forms.Label();
-            this.lblQueueCount = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnCall = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -111,6 +110,9 @@ namespace Tobasa
             this.tbServer = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.lblQueueCount = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnRefreshing = new System.Windows.Forms.Button();
             this.mainTab.SuspendLayout();
             this.tabPageMain.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -126,6 +128,7 @@ namespace Tobasa
             this.tabOptions.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbConnProps.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblStatus
@@ -134,7 +137,7 @@ namespace Tobasa
             this.lblStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStatus.ForeColor = System.Drawing.Color.White;
-            this.lblStatus.Location = new System.Drawing.Point(0, 471);
+            this.lblStatus.Location = new System.Drawing.Point(0, 490);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Padding = new System.Windows.Forms.Padding(10, 0, 0, 2);
             this.lblStatus.Size = new System.Drawing.Size(138, 15);
@@ -153,7 +156,7 @@ namespace Tobasa
             this.mainTab.Location = new System.Drawing.Point(5, 5);
             this.mainTab.Name = "mainTab";
             this.mainTab.SelectedIndex = 0;
-            this.mainTab.Size = new System.Drawing.Size(679, 449);
+            this.mainTab.Size = new System.Drawing.Size(679, 468);
             this.mainTab.TabIndex = 17;
             this.mainTab.Selected += new System.Windows.Forms.TabControlEventHandler(this.OnPageSelected);
             // 
@@ -165,7 +168,7 @@ namespace Tobasa
             this.tabPageMain.Location = new System.Drawing.Point(4, 22);
             this.tabPageMain.Name = "tabPageMain";
             this.tabPageMain.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMain.Size = new System.Drawing.Size(671, 423);
+            this.tabPageMain.Size = new System.Drawing.Size(671, 442);
             this.tabPageMain.TabIndex = 0;
             this.tabPageMain.Text = "General";
             // 
@@ -190,17 +193,18 @@ namespace Tobasa
             this.tableLayoutPanel3.Controls.Add(this.panel4, 3, 3);
             this.tableLayoutPanel3.Controls.Add(this.label11, 1, 4);
             this.tableLayoutPanel3.Controls.Add(this.postsBtnDiv, 2, 4);
+            this.tableLayoutPanel3.Controls.Add(this.panel1, 2, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 5;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.70983F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.434053F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.38849F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(665, 417);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(665, 436);
             this.tableLayoutPanel3.TabIndex = 15;
             // 
             // label12
@@ -209,9 +213,9 @@ namespace Tobasa
             this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.MediumBlue;
-            this.label12.Location = new System.Drawing.Point(467, 331);
+            this.label12.Location = new System.Drawing.Point(467, 347);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(146, 86);
+            this.label12.Size = new System.Drawing.Size(146, 89);
             this.label12.TabIndex = 14;
             this.label12.Text = "F12 : Next Number";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -223,10 +227,10 @@ namespace Tobasa
             this.capStation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.capStation.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.capStation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.capStation.Location = new System.Drawing.Point(46, 20);
+            this.capStation.Location = new System.Drawing.Point(46, 55);
             this.capStation.Margin = new System.Windows.Forms.Padding(0);
             this.capStation.Name = "capStation";
-            this.capStation.Size = new System.Drawing.Size(152, 41);
+            this.capStation.Size = new System.Drawing.Size(152, 32);
             this.capStation.TabIndex = 15;
             this.capStation.Text = "Station";
             this.capStation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -239,10 +243,10 @@ namespace Tobasa
             this.capNumber.Dock = System.Windows.Forms.DockStyle.Fill;
             this.capNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.capNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.capNumber.Location = new System.Drawing.Point(198, 20);
+            this.capNumber.Location = new System.Drawing.Point(198, 55);
             this.capNumber.Margin = new System.Windows.Forms.Padding(0);
             this.capNumber.Name = "capNumber";
-            this.capNumber.Size = new System.Drawing.Size(266, 41);
+            this.capNumber.Size = new System.Drawing.Size(266, 32);
             this.capNumber.TabIndex = 16;
             this.capNumber.Text = "Post";
             this.capNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -255,10 +259,10 @@ namespace Tobasa
             this.capNext.Dock = System.Windows.Forms.DockStyle.Fill;
             this.capNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.capNext.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.capNext.Location = new System.Drawing.Point(464, 20);
+            this.capNext.Location = new System.Drawing.Point(464, 55);
             this.capNext.Margin = new System.Windows.Forms.Padding(0);
             this.capNext.Name = "capNext";
-            this.capNext.Size = new System.Drawing.Size(152, 41);
+            this.capNext.Size = new System.Drawing.Size(152, 32);
             this.capNext.TabIndex = 17;
             this.capNext.Text = "Total Queue";
             this.capNext.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -271,10 +275,10 @@ namespace Tobasa
             this.lblStation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblStation.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblStation.Location = new System.Drawing.Point(46, 61);
+            this.lblStation.Location = new System.Drawing.Point(46, 87);
             this.lblStation.Margin = new System.Windows.Forms.Padding(0);
             this.lblStation.Name = "lblStation";
-            this.lblStation.Size = new System.Drawing.Size(152, 83);
+            this.lblStation.Size = new System.Drawing.Size(152, 63);
             this.lblStation.TabIndex = 18;
             this.lblStation.Text = "CALL01";
             this.lblStation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -287,40 +291,24 @@ namespace Tobasa
             this.lblPost.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPost.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPost.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblPost.Location = new System.Drawing.Point(198, 61);
+            this.lblPost.Location = new System.Drawing.Point(198, 87);
             this.lblPost.Margin = new System.Windows.Forms.Padding(0);
             this.lblPost.Name = "lblPost";
-            this.lblPost.Size = new System.Drawing.Size(266, 83);
+            this.lblPost.Size = new System.Drawing.Size(266, 63);
             this.lblPost.TabIndex = 19;
             this.lblPost.Text = "POST1";
             this.lblPost.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblPost.Resize += new System.EventHandler(this.OnLabelResize);
-            // 
-            // lblQueueCount
-            // 
-            this.lblQueueCount.AutoSize = true;
-            this.lblQueueCount.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.lblQueueCount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblQueueCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQueueCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblQueueCount.Location = new System.Drawing.Point(464, 61);
-            this.lblQueueCount.Margin = new System.Windows.Forms.Padding(0);
-            this.lblQueueCount.Name = "lblQueueCount";
-            this.lblQueueCount.Size = new System.Drawing.Size(152, 83);
-            this.lblQueueCount.TabIndex = 20;
-            this.lblQueueCount.Text = "0";
-            this.lblQueueCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblQueueCount.Resize += new System.EventHandler(this.OnLabelResize);
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.panel2.Controls.Add(this.btnCall);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(46, 144);
+            this.panel2.Location = new System.Drawing.Point(46, 150);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(152, 187);
+            this.panel2.Size = new System.Drawing.Size(152, 197);
             this.panel2.TabIndex = 21;
             // 
             // btnCall
@@ -338,7 +326,7 @@ namespace Tobasa
             this.btnCall.ForeColor = System.Drawing.Color.MintCream;
             this.btnCall.Location = new System.Drawing.Point(5, 9);
             this.btnCall.Name = "btnCall";
-            this.btnCall.Size = new System.Drawing.Size(142, 169);
+            this.btnCall.Size = new System.Drawing.Size(142, 179);
             this.btnCall.TabIndex = 5;
             this.btnCall.Text = "Call";
             this.btnCall.UseVisualStyleBackColor = false;
@@ -349,10 +337,10 @@ namespace Tobasa
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.panel3.Controls.Add(this.tableLayoutPanel1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(198, 144);
+            this.panel3.Location = new System.Drawing.Point(198, 150);
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(266, 187);
+            this.panel3.Size = new System.Drawing.Size(266, 197);
             this.panel3.TabIndex = 22;
             // 
             // tableLayoutPanel1
@@ -368,7 +356,7 @@ namespace Tobasa
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(266, 187);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(266, 197);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // capCurrNumber
@@ -380,7 +368,7 @@ namespace Tobasa
             this.capCurrNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.capCurrNumber.Location = new System.Drawing.Point(3, 0);
             this.capCurrNumber.Name = "capCurrNumber";
-            this.capCurrNumber.Size = new System.Drawing.Size(260, 37);
+            this.capCurrNumber.Size = new System.Drawing.Size(260, 39);
             this.capCurrNumber.TabIndex = 8;
             this.capCurrNumber.Text = "Current Number";
             this.capCurrNumber.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -395,9 +383,9 @@ namespace Tobasa
             this.lblNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.lblNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNumber.ForeColor = System.Drawing.Color.SteelBlue;
-            this.lblNumber.Location = new System.Drawing.Point(3, 37);
+            this.lblNumber.Location = new System.Drawing.Point(3, 39);
             this.lblNumber.Name = "lblNumber";
-            this.lblNumber.Size = new System.Drawing.Size(260, 150);
+            this.lblNumber.Size = new System.Drawing.Size(260, 158);
             this.lblNumber.TabIndex = 7;
             this.lblNumber.Text = "R999";
             this.lblNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -408,10 +396,10 @@ namespace Tobasa
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.panel4.Controls.Add(this.btnNext);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(464, 144);
+            this.panel4.Location = new System.Drawing.Point(464, 150);
             this.panel4.Margin = new System.Windows.Forms.Padding(0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(152, 187);
+            this.panel4.Size = new System.Drawing.Size(152, 197);
             this.panel4.TabIndex = 23;
             // 
             // btnNext
@@ -429,7 +417,7 @@ namespace Tobasa
             this.btnNext.ForeColor = System.Drawing.Color.MintCream;
             this.btnNext.Location = new System.Drawing.Point(5, 9);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(142, 169);
+            this.btnNext.Size = new System.Drawing.Size(142, 179);
             this.btnNext.TabIndex = 4;
             this.btnNext.Text = "Next";
             this.btnNext.UseVisualStyleBackColor = false;
@@ -441,9 +429,9 @@ namespace Tobasa
             this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.MediumBlue;
-            this.label11.Location = new System.Drawing.Point(49, 331);
+            this.label11.Location = new System.Drawing.Point(49, 347);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(146, 86);
+            this.label11.Size = new System.Drawing.Size(146, 89);
             this.label11.TabIndex = 13;
             this.label11.Text = "F9 : Recall";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -467,12 +455,12 @@ namespace Tobasa
             this.postsBtnDiv.Controls.Add(this.btnChangePost8, 3, 1);
             this.postsBtnDiv.Controls.Add(this.btnChangePost9, 4, 1);
             this.postsBtnDiv.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.postsBtnDiv.Location = new System.Drawing.Point(201, 334);
+            this.postsBtnDiv.Location = new System.Drawing.Point(201, 350);
             this.postsBtnDiv.Name = "postsBtnDiv";
             this.postsBtnDiv.RowCount = 2;
             this.postsBtnDiv.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.postsBtnDiv.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.postsBtnDiv.Size = new System.Drawing.Size(260, 80);
+            this.postsBtnDiv.Size = new System.Drawing.Size(260, 83);
             this.postsBtnDiv.TabIndex = 24;
             // 
             // btnChangePost0
@@ -481,7 +469,7 @@ namespace Tobasa
             this.btnChangePost0.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnChangePost0.Location = new System.Drawing.Point(3, 3);
             this.btnChangePost0.Name = "btnChangePost0";
-            this.btnChangePost0.Size = new System.Drawing.Size(46, 34);
+            this.btnChangePost0.Size = new System.Drawing.Size(46, 35);
             this.btnChangePost0.TabIndex = 0;
             this.btnChangePost0.Text = "Post 0";
             this.btnChangePost0.UseVisualStyleBackColor = true;
@@ -493,7 +481,7 @@ namespace Tobasa
             this.btnChangePost1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnChangePost1.Location = new System.Drawing.Point(55, 3);
             this.btnChangePost1.Name = "btnChangePost1";
-            this.btnChangePost1.Size = new System.Drawing.Size(46, 34);
+            this.btnChangePost1.Size = new System.Drawing.Size(46, 35);
             this.btnChangePost1.TabIndex = 1;
             this.btnChangePost1.Text = "Post 1";
             this.btnChangePost1.UseVisualStyleBackColor = true;
@@ -505,7 +493,7 @@ namespace Tobasa
             this.btnChangePost2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnChangePost2.Location = new System.Drawing.Point(107, 3);
             this.btnChangePost2.Name = "btnChangePost2";
-            this.btnChangePost2.Size = new System.Drawing.Size(46, 34);
+            this.btnChangePost2.Size = new System.Drawing.Size(46, 35);
             this.btnChangePost2.TabIndex = 2;
             this.btnChangePost2.Text = "Post 2";
             this.btnChangePost2.UseVisualStyleBackColor = true;
@@ -517,7 +505,7 @@ namespace Tobasa
             this.btnChangePost3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnChangePost3.Location = new System.Drawing.Point(159, 3);
             this.btnChangePost3.Name = "btnChangePost3";
-            this.btnChangePost3.Size = new System.Drawing.Size(46, 34);
+            this.btnChangePost3.Size = new System.Drawing.Size(46, 35);
             this.btnChangePost3.TabIndex = 3;
             this.btnChangePost3.Text = "Post 3";
             this.btnChangePost3.UseVisualStyleBackColor = true;
@@ -529,7 +517,7 @@ namespace Tobasa
             this.btnChangePost4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnChangePost4.Location = new System.Drawing.Point(211, 3);
             this.btnChangePost4.Name = "btnChangePost4";
-            this.btnChangePost4.Size = new System.Drawing.Size(46, 34);
+            this.btnChangePost4.Size = new System.Drawing.Size(46, 35);
             this.btnChangePost4.TabIndex = 4;
             this.btnChangePost4.Text = "Post 4";
             this.btnChangePost4.UseVisualStyleBackColor = true;
@@ -539,9 +527,9 @@ namespace Tobasa
             // 
             this.btnChangePost5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnChangePost5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChangePost5.Location = new System.Drawing.Point(3, 43);
+            this.btnChangePost5.Location = new System.Drawing.Point(3, 44);
             this.btnChangePost5.Name = "btnChangePost5";
-            this.btnChangePost5.Size = new System.Drawing.Size(46, 34);
+            this.btnChangePost5.Size = new System.Drawing.Size(46, 36);
             this.btnChangePost5.TabIndex = 5;
             this.btnChangePost5.Text = "Post 5";
             this.btnChangePost5.UseVisualStyleBackColor = true;
@@ -551,9 +539,9 @@ namespace Tobasa
             // 
             this.btnChangePost6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnChangePost6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChangePost6.Location = new System.Drawing.Point(55, 43);
+            this.btnChangePost6.Location = new System.Drawing.Point(55, 44);
             this.btnChangePost6.Name = "btnChangePost6";
-            this.btnChangePost6.Size = new System.Drawing.Size(46, 34);
+            this.btnChangePost6.Size = new System.Drawing.Size(46, 36);
             this.btnChangePost6.TabIndex = 6;
             this.btnChangePost6.Text = "Post 6";
             this.btnChangePost6.UseVisualStyleBackColor = true;
@@ -563,9 +551,9 @@ namespace Tobasa
             // 
             this.btnChangePost7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnChangePost7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChangePost7.Location = new System.Drawing.Point(107, 43);
+            this.btnChangePost7.Location = new System.Drawing.Point(107, 44);
             this.btnChangePost7.Name = "btnChangePost7";
-            this.btnChangePost7.Size = new System.Drawing.Size(46, 34);
+            this.btnChangePost7.Size = new System.Drawing.Size(46, 36);
             this.btnChangePost7.TabIndex = 7;
             this.btnChangePost7.Text = "Post 7";
             this.btnChangePost7.UseVisualStyleBackColor = true;
@@ -575,9 +563,9 @@ namespace Tobasa
             // 
             this.btnChangePost8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnChangePost8.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChangePost8.Location = new System.Drawing.Point(159, 43);
+            this.btnChangePost8.Location = new System.Drawing.Point(159, 44);
             this.btnChangePost8.Name = "btnChangePost8";
-            this.btnChangePost8.Size = new System.Drawing.Size(46, 34);
+            this.btnChangePost8.Size = new System.Drawing.Size(46, 36);
             this.btnChangePost8.TabIndex = 8;
             this.btnChangePost8.Text = "Post 8";
             this.btnChangePost8.UseVisualStyleBackColor = true;
@@ -587,9 +575,9 @@ namespace Tobasa
             // 
             this.btnChangePost9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnChangePost9.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChangePost9.Location = new System.Drawing.Point(211, 43);
+            this.btnChangePost9.Location = new System.Drawing.Point(211, 44);
             this.btnChangePost9.Name = "btnChangePost9";
-            this.btnChangePost9.Size = new System.Drawing.Size(46, 34);
+            this.btnChangePost9.Size = new System.Drawing.Size(46, 36);
             this.btnChangePost9.TabIndex = 9;
             this.btnChangePost9.Text = "Post 9";
             this.btnChangePost9.UseVisualStyleBackColor = true;
@@ -606,13 +594,13 @@ namespace Tobasa
             this.tabProcessing.Location = new System.Drawing.Point(4, 22);
             this.tabProcessing.Name = "tabProcessing";
             this.tabProcessing.Padding = new System.Windows.Forms.Padding(3);
-            this.tabProcessing.Size = new System.Drawing.Size(671, 423);
+            this.tabProcessing.Size = new System.Drawing.Size(671, 442);
             this.tabProcessing.TabIndex = 1;
             this.tabProcessing.Text = "Processing";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(322, 301);
+            this.button1.Location = new System.Drawing.Point(322, 320);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(140, 23);
             this.button1.TabIndex = 8;
@@ -626,7 +614,7 @@ namespace Tobasa
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.MediumBlue;
-            this.label14.Location = new System.Drawing.Point(6, 305);
+            this.label14.Location = new System.Drawing.Point(6, 324);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(207, 16);
             this.label14.TabIndex = 7;
@@ -635,7 +623,7 @@ namespace Tobasa
             // btnRefresh
             // 
             this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRefresh.Location = new System.Drawing.Point(468, 301);
+            this.btnRefresh.Location = new System.Drawing.Point(468, 320);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(75, 23);
             this.btnRefresh.TabIndex = 4;
@@ -684,7 +672,7 @@ namespace Tobasa
             this.gridJobs.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.gridJobs.RowHeadersWidth = 20;
             this.gridJobs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridJobs.Size = new System.Drawing.Size(534, 274);
+            this.gridJobs.Size = new System.Drawing.Size(534, 293);
             this.gridJobs.TabIndex = 3;
             this.gridJobs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnGridJobsCellDoubleClick);
             // 
@@ -698,14 +686,14 @@ namespace Tobasa
             this.tabFinished.Location = new System.Drawing.Point(4, 22);
             this.tabFinished.Name = "tabFinished";
             this.tabFinished.Padding = new System.Windows.Forms.Padding(3);
-            this.tabFinished.Size = new System.Drawing.Size(671, 423);
+            this.tabFinished.Size = new System.Drawing.Size(671, 442);
             this.tabFinished.TabIndex = 2;
             this.tabFinished.Text = "Completed";
             this.tabFinished.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(326, 301);
+            this.button2.Location = new System.Drawing.Point(326, 320);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(136, 23);
             this.button2.TabIndex = 7;
@@ -719,7 +707,7 @@ namespace Tobasa
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.MediumBlue;
-            this.label13.Location = new System.Drawing.Point(6, 305);
+            this.label13.Location = new System.Drawing.Point(6, 324);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(248, 16);
             this.label13.TabIndex = 6;
@@ -728,7 +716,7 @@ namespace Tobasa
             // btnRefreshFin
             // 
             this.btnRefreshFin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRefreshFin.Location = new System.Drawing.Point(468, 301);
+            this.btnRefreshFin.Location = new System.Drawing.Point(468, 320);
             this.btnRefreshFin.Name = "btnRefreshFin";
             this.btnRefreshFin.Size = new System.Drawing.Size(75, 23);
             this.btnRefreshFin.TabIndex = 5;
@@ -769,7 +757,7 @@ namespace Tobasa
             this.gridJobsFin.ReadOnly = true;
             this.gridJobsFin.RowHeadersWidth = 20;
             this.gridJobsFin.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridJobsFin.Size = new System.Drawing.Size(534, 274);
+            this.gridJobsFin.Size = new System.Drawing.Size(534, 293);
             this.gridJobsFin.TabIndex = 4;
             this.gridJobsFin.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnGridJobsFinCellDoubleClick);
             // 
@@ -993,12 +981,53 @@ namespace Tobasa
             this.label4.TabIndex = 18;
             this.label4.Text = "Port";
             // 
+            // lblQueueCount
+            // 
+            this.lblQueueCount.AutoSize = true;
+            this.lblQueueCount.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.lblQueueCount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblQueueCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQueueCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblQueueCount.Location = new System.Drawing.Point(464, 87);
+            this.lblQueueCount.Margin = new System.Windows.Forms.Padding(0);
+            this.lblQueueCount.Name = "lblQueueCount";
+            this.lblQueueCount.Size = new System.Drawing.Size(152, 63);
+            this.lblQueueCount.TabIndex = 20;
+            this.lblQueueCount.Text = "0";
+            this.lblQueueCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblQueueCount.Resize += new System.EventHandler(this.OnLabelResize);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnRefreshing);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(201, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(260, 49);
+            this.panel1.TabIndex = 25;
+            // 
+            // btnRefreshing
+            // 
+            this.btnRefreshing.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnRefreshing.BackColor = System.Drawing.Color.AliceBlue;
+            this.btnRefreshing.BackgroundImage = global::Tobasa.Properties.Resources.lblgreen;
+            this.btnRefreshing.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnRefreshing.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefreshing.ForeColor = System.Drawing.Color.MintCream;
+            this.btnRefreshing.Location = new System.Drawing.Point(0, 0);
+            this.btnRefreshing.Name = "btnRefreshing";
+            this.btnRefreshing.Size = new System.Drawing.Size(260, 49);
+            this.btnRefreshing.TabIndex = 0;
+            this.btnRefreshing.Text = "Refresh";
+            this.btnRefreshing.UseVisualStyleBackColor = false;
+            this.btnRefreshing.Click += new System.EventHandler(this.btnRefreshing_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(691, 486);
+            this.ClientSize = new System.Drawing.Size(691, 505);
             this.Controls.Add(this.mainTab);
             this.Controls.Add(this.lblStatus);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1030,6 +1059,7 @@ namespace Tobasa
             this.groupBox1.PerformLayout();
             this.gbConnProps.ResumeLayout(false);
             this.gbConnProps.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1071,7 +1101,6 @@ namespace Tobasa
         private System.Windows.Forms.Label capNext;
         private System.Windows.Forms.Label lblStation;
         private System.Windows.Forms.Label lblPost;
-        private System.Windows.Forms.Label lblQueueCount;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
@@ -1097,6 +1126,9 @@ namespace Tobasa
 		private System.Windows.Forms.Button btnSaveSettings;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label lblQueueCount;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnRefreshing;
     }
 }
 

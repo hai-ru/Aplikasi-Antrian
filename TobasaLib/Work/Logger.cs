@@ -40,6 +40,7 @@ namespace Tobasa
         {
             string filename = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
             string newFile = Path.GetTempPath() + filename + ".log";
+            //MessageBox.Show(newFile);
             return newFile;
         }
 

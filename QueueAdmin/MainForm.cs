@@ -53,6 +53,7 @@ namespace Tobasa
             [Tbl.sms] = new TableProp(Tbl.sms)
 
         };
+        private DataTable postData;
 
         #endregion
 
@@ -299,6 +300,7 @@ namespace Tobasa
                     else if (tableName == Tbl.logins)
                     {
                         _tableProps[tableName].TotalRows = totalRowInt;
+                        //MessageBox.Show(jsonDataTable);
                         InitGridLogin(jsonDataTable);
                         tbReordStatus.Text = _tableProps[tableName].NavigationStatus;
                         btnDeleteData.Enabled = totalRowInt > 0;
@@ -619,6 +621,8 @@ namespace Tobasa
                     return;
                 }
 
+                postData = dataTable;
+
                 gridPosts.DataSource = dataTable;
                 DataGridView gridView = gridPosts;
 
@@ -631,7 +635,7 @@ namespace Tobasa
                     column.HeaderText = "Prefix";
                 column = gridView.Columns[2];
                     column.Width = 300;
-                    column.HeaderText = "Remark";
+                    column.HeaderText = "Keterangan";
 
             }
             catch (Exception e)
@@ -669,6 +673,9 @@ namespace Tobasa
                 column = gridView.Columns[3];
                     column.Width = 50;
                     column.HeaderText = "Active";
+                column = gridView.Columns[4];
+                    column.Width = 50;
+                    column.HeaderText = "Postname";
             }
             catch (Exception e)
             {
@@ -744,6 +751,7 @@ namespace Tobasa
         {
             FormLogin form = new FormLogin(this);
             form.DataChanged += new Action<string>(OnSubformDataChanged);
+            form.postData = this.postData;
             form.ShowDialog();
         }
 
@@ -909,9 +917,11 @@ namespace Tobasa
             else
             if (page == tabStation)
                 RequestTableFromServer(Tbl.stations);
-            if (page == tabLogin)
+            else if (page == tabLogin)
+            {
+                RequestTableFromServer(Tbl.posts);
                 RequestTableFromServer(Tbl.logins);
-            else if (page == tabPost)
+            } else if (page == tabPost)
                 RequestTableFromServer(Tbl.posts);
             else if (page == tabRunText)
                 RequestTableFromServer(Tbl.runningtexts);
@@ -1029,6 +1039,8 @@ namespace Tobasa
             string password = Convert.ToString(gridLogins.Rows[e.RowIndex].Cells[1].Value);
             string expired  = Convert.ToString(gridLogins.Rows[e.RowIndex].Cells[2].Value);
             string active   = Convert.ToString(gridLogins.Rows[e.RowIndex].Cells[3].Value);
+            string postname = Convert.ToString(gridLogins.Rows[e.RowIndex].Cells[4].Value);
+
 
             if (usrName == "")
                 return;
@@ -1038,11 +1050,13 @@ namespace Tobasa
                 { "username", usrName.Trim() },
                 { "password", password.Trim() },
                 { "expired",  expired.Trim() },
-                { "active",   active.Trim() }
+                { "active",   active.Trim() },
+                { "postname",   postname.Trim() }
             };
 
             FormLogin form = new FormLogin(this, data);
             form.DataChanged += new Action<string>(OnSubformDataChanged);
+            form.postData = this.postData;
             form.ShowDialog();
         }
 

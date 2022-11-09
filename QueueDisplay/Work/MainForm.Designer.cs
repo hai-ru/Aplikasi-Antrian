@@ -250,7 +250,7 @@ namespace Tobasa
             this.tabControl.Location = new System.Drawing.Point(0, 5);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(625, 253);
+            this.tabControl.Size = new System.Drawing.Size(625, 258);
             this.tabControl.TabIndex = 2;
             // 
             // tabVideoClip
@@ -265,7 +265,7 @@ namespace Tobasa
             this.tabVideoClip.Location = new System.Drawing.Point(4, 22);
             this.tabVideoClip.Name = "tabVideoClip";
             this.tabVideoClip.Padding = new System.Windows.Forms.Padding(3);
-            this.tabVideoClip.Size = new System.Drawing.Size(617, 227);
+            this.tabVideoClip.Size = new System.Drawing.Size(617, 232);
             this.tabVideoClip.TabIndex = 0;
             this.tabVideoClip.Text = "Video Clip File";
             // 
@@ -335,7 +335,7 @@ namespace Tobasa
             this.tabVideoDevice.Location = new System.Drawing.Point(4, 22);
             this.tabVideoDevice.Name = "tabVideoDevice";
             this.tabVideoDevice.Padding = new System.Windows.Forms.Padding(3);
-            this.tabVideoDevice.Size = new System.Drawing.Size(617, 227);
+            this.tabVideoDevice.Size = new System.Drawing.Size(617, 232);
             this.tabVideoDevice.TabIndex = 1;
             this.tabVideoDevice.Text = "Video Device";
             this.tabVideoDevice.UseVisualStyleBackColor = true;
@@ -466,7 +466,7 @@ namespace Tobasa
             this.tabOptions.Location = new System.Drawing.Point(4, 22);
             this.tabOptions.Name = "tabOptions";
             this.tabOptions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabOptions.Size = new System.Drawing.Size(617, 227);
+            this.tabOptions.Size = new System.Drawing.Size(617, 232);
             this.tabOptions.TabIndex = 2;
             this.tabOptions.Text = "Connection";
             this.tabOptions.UseVisualStyleBackColor = true;
@@ -594,7 +594,7 @@ namespace Tobasa
             this.tabMisc.Location = new System.Drawing.Point(4, 22);
             this.tabMisc.Name = "tabMisc";
             this.tabMisc.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMisc.Size = new System.Drawing.Size(617, 227);
+            this.tabMisc.Size = new System.Drawing.Size(617, 232);
             this.tabMisc.TabIndex = 3;
             this.tabMisc.Text = "Miscellaneous";
             this.tabMisc.UseVisualStyleBackColor = true;
@@ -850,7 +850,7 @@ namespace Tobasa
             this.tabPostOpt.Location = new System.Drawing.Point(4, 22);
             this.tabPostOpt.Name = "tabPostOpt";
             this.tabPostOpt.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPostOpt.Size = new System.Drawing.Size(617, 227);
+            this.tabPostOpt.Size = new System.Drawing.Size(617, 232);
             this.tabPostOpt.TabIndex = 18;
             this.tabPostOpt.Text = "Post Options";
             this.tabPostOpt.UseVisualStyleBackColor = true;
@@ -994,7 +994,7 @@ namespace Tobasa
             this.tabPageRunText.Location = new System.Drawing.Point(4, 22);
             this.tabPageRunText.Name = "tabPageRunText";
             this.tabPageRunText.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageRunText.Size = new System.Drawing.Size(617, 227);
+            this.tabPageRunText.Size = new System.Drawing.Size(617, 232);
             this.tabPageRunText.TabIndex = 17;
             this.tabPageRunText.Text = "Running Text";
             this.tabPageRunText.UseVisualStyleBackColor = true;
@@ -1191,7 +1191,7 @@ namespace Tobasa
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(524, 235);
+            this.btnSave.Location = new System.Drawing.Point(527, 269);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(94, 23);
             this.btnSave.TabIndex = 11;
@@ -1277,7 +1277,7 @@ namespace Tobasa
             this.pnlMore.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
             this.pnlMore.MinimumSize = new System.Drawing.Size(625, 229);
             this.pnlMore.Name = "pnlMore";
-            this.pnlMore.Size = new System.Drawing.Size(625, 263);
+            this.pnlMore.Size = new System.Drawing.Size(625, 295);
             this.pnlMore.TabIndex = 16;
             // 
             // lblStatus
@@ -1285,7 +1285,7 @@ namespace Tobasa
             this.lblStatus.AutoSize = true;
             this.lblStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(0, 486);
+            this.lblStatus.Location = new System.Drawing.Point(0, 559);
             this.lblStatus.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Padding = new System.Windows.Forms.Padding(10, 0, 0, 2);
@@ -1298,7 +1298,7 @@ namespace Tobasa
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(649, 501);
+            this.ClientSize = new System.Drawing.Size(649, 574);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.pnlMore);
             this.Controls.Add(this.chkMute);

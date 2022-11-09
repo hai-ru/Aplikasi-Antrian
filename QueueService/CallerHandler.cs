@@ -31,6 +31,11 @@ namespace Tobasa
                             if (result != null && result.Count == 4)
                             {
                                 string postPrefix   = result["postPrefix"];
+                                //char delimiter = !;
+                                var dataPost = postPrefix.Split('!');
+                                postPrefix = dataPost[0];
+                                string postname = dataPost[1];
+                                
                                 string numberS      = result["number"];
                                 string numberLeft   = result["numberLeft"];
 
@@ -41,7 +46,8 @@ namespace Tobasa
                                     Msg.Separator + "Identifier" +
                                     Msg.Separator + postPrefix +
                                     Msg.CompDelimiter + numberS +
-                                    Msg.CompDelimiter + numberLeft;
+                                    Msg.CompDelimiter + numberLeft+
+                                    Msg.CompDelimiter + postname;
 
                                 session.Send(messageC);
                             }
@@ -64,17 +70,22 @@ namespace Tobasa
                             if (result != null && result.Count == 4)
                             {
                                 string postPrefix   = result["postPrefix"];
+                                var postData = postPrefix.Split('!');
+                                postPrefix = postData[0];
+                                string postName = postData[1];
+
                                 string numberS      = result["number"];
                                 string numberLeft   = result["numberLeft"];
 
                                 // Send response to client(caller)
-                                string messageC = 
+                                string messageC =
                                     Msg.CallerGetNext.Text +
                                     Msg.Separator + "RES" +
                                     Msg.Separator + "Identifier" +
                                     Msg.Separator + postPrefix +
                                     Msg.CompDelimiter + numberS +
-                                    Msg.CompDelimiter + numberLeft;
+                                    Msg.CompDelimiter + numberLeft +
+                                    Msg.CompDelimiter + postName;
 
                                 session.Send(messageC);
 
@@ -91,7 +102,8 @@ namespace Tobasa
                                         Msg.CompDelimiter + numberS +
                                         Msg.CompDelimiter + numberLeft +
                                         Msg.CompDelimiter + post +
-                                        Msg.CompDelimiter + callerId; 
+                                        Msg.CompDelimiter + callerId+
+                                        Msg.CompDelimiter + postName;
 
                                     QueueServer.SendMessageToQueueDisplay(messageD, post);
 
@@ -127,6 +139,8 @@ namespace Tobasa
                     string post      = qmessage.PayloadValues["post"];
                     string caller    = qmessage.PayloadValues["station"];
                     string postrefix = QueueRepository.GetPostNumberPrefix(post);
+                    var postData = postrefix.Split('!');
+                    postrefix = postData[0];
 
                     // Send message to Queue display, to update displayed number
                     // XXX is sent to replace total waiting queue 

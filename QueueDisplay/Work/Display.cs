@@ -985,13 +985,19 @@ namespace Tobasa
             // animate label
             if (lblNo.ForeColor == Color.Gold)
             {
-                lblNo.ForeColor = Properties.Settings.Default.NumberAnimationColor;
-                lblCtr.ForeColor = Properties.Settings.Default.NumberAnimationColor;
+                System.Drawing.Color animColor = System.Drawing.Color.Red;
+                if (!Properties.Settings.Default.NumberAnimationColor.IsEmpty)
+                {
+                    animColor = Properties.Settings.Default.NumberAnimationColor;
+                }
+                lblNo.ForeColor = animColor;
+                if(lblCtr != null)
+                lblCtr.ForeColor = animColor;
             }
             else
             {
                 lblNo.ForeColor = Color.Gold;
-                lblCtr.ForeColor = Color.Gold;
+                if (lblCtr != null)  lblCtr.ForeColor = Color.Gold;
             }
 
             /// stops the timer after specified limit(seconds) in settings

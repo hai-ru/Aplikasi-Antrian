@@ -7,5 +7,6 @@ CREATE TABLE "logins" (
 	"last_login"	DATETIME,
 	"firebase_token"	TEXT,
 	"post_code"	TEXT,
+	"postname"	VARCHAR(32),
 	PRIMARY KEY("id")
 )
