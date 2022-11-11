@@ -316,6 +316,17 @@ namespace Tobasa
 
             if (!client.LoggedIn)
             {
+                Message qmessage = new SysMessage(arg);
+
+                if (
+                    message.StartsWith("SYS") &&
+                    qmessage.MessageType == Msg.SysGetTable && 
+                    qmessage.Direction == MessageDirection.REQUEST
+                   )
+                {
+                    sysHandler.OnMessage(arg, client);
+                } else
+
                 if (message.StartsWith(Msg.SysLogin.Text + Msg.Separator + "REQ"))
                 {
                     //Console.WriteLine("handlemessage >> " + message);

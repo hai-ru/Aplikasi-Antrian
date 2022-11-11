@@ -646,7 +646,7 @@ namespace Tobasa
                     Database.Me.OpenConnection();
                     using (DbCommand cmd = Database.Me.Connection.CreateCommand())
                     {
-                        Console.WriteLine(sql);
+                        //Console.WriteLine(sql);
                         cmd.CommandText = sql;
                         cmd.ExecuteNonQuery();
 
@@ -1057,7 +1057,12 @@ namespace Tobasa
                 try
                 {
                     //string sql = string.Format("SELECT name, post, canlogin, posts.keterangan as keterangan FROM stations LEFT JOIN posts ON stations.post = posts.name ORDER BY name");
-                    string sql = string.Format("SELECT stations.name, post, canlogin, stations.keterangan, posts.keterangan as keterangan_post FROM stations LEFT JOIN posts ON stations.post = posts.name ORDER BY stations.name");
+                    string sql = string.Format("SELECT stations.name, post, canlogin, stations.keterangan, posts.keterangan as keterangan_post FROM stations LEFT JOIN posts ON stations.post = posts.name");
+                    if(limit == 996699)
+                    {
+                        sql += " WHERE stations.name LIKE '%CALL%' ";
+                    }
+                    sql += "ORDER BY stations.name";
                     sql += Database.Me.GetOffsetLimit(offset, limit);
 
                     Database.Me.OpenConnection();
@@ -1344,7 +1349,7 @@ namespace Tobasa
                     DbDataAdapter sda = Database.Me.CreateDataAdapter(sql);
                     Database.Me.AddParameter(sda.SelectCommand, "post", post, DbType.String);
 
-                    Console.WriteLine(sql);
+                    //Console.WriteLine(sql);
 
                     DataTable dataTable = new DataTable();
                     sda.Fill(dataTable);

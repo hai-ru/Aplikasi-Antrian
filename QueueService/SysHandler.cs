@@ -14,14 +14,51 @@ namespace Tobasa
 
         public void OnMessage(DataReceivedEventArgs arg, Client client)
         {
-            if (!client.LoggedIn)
-                return;
 
             Exception exp = null;
             try
             {
                 Message qmessage = new SysMessage(arg);
                 Logger.Log("[SysHandler] Processing " + qmessage.MessageType.Text + " from " + client.RemoteInfo);
+
+
+                // Handle SysGetTable
+                if (qmessage.MessageType == Msg.SysGetTable && qmessage.Direction == MessageDirection.REQUEST)
+                {
+                    string tableName = qmessage.PayloadValues["tablename"];
+
+                    MessageHandler<Dictionary<string, string>> handler = new MessageHandler<Dictionary<string, string>>(qmessage)
+                    {
+                        ReceiveHandler = new Func<Dictionary<string, string>, Dictionary<string, string>>(QueueRepository.GetTable),
+                        ResponseHandler = (session, resultDict) =>
+                        {
+                            // Send response to client
+                            if (resultDict != null)
+                            {
+                                string totalRow = resultDict["totalrow"];
+                                string jsonTable = resultDict["jsontable"];
+
+                                //if (string.IsNullOrWhiteSpace(jsonTable))
+                                //    return;
+
+                                // SYS|GET_TABLE|RES|Identifier|[Table!Result!TotalRow]
+                                string message = Msg.SysGetTable.Text +
+                                                 Msg.Separator + "RES" +
+                                                 Msg.Separator + "Identifier" +
+                                                 Msg.Separator + tableName +
+                                                 Msg.CompDelimiter + jsonTable +
+                                                 Msg.CompDelimiter + totalRow;
+
+                                session.Send(message);
+                            }
+                        }
+                    };
+
+                    handler.Process();
+                }
+
+                if (!client.LoggedIn)
+                    return;
 
                 // Handle SysInsTable and SysUpdTable
                 if ( (qmessage.MessageType == Msg.SysInsTable || qmessage.MessageType == Msg.SysUpdTable) && qmessage.Direction == MessageDirection.REQUEST)
@@ -89,41 +126,6 @@ namespace Tobasa
                                                  Msg.Separator + tableName +        // tablename
                                                  Msg.CompDelimiter + result +       // result
                                                  Msg.CompDelimiter + affected;      // affected
-
-                                session.Send(message);
-                            }
-                        }
-                    };
-
-                    handler.Process();
-                }
-
-                // Handle SysGetTable
-                if (qmessage.MessageType == Msg.SysGetTable && qmessage.Direction == MessageDirection.REQUEST)
-                {
-                    string tableName = qmessage.PayloadValues["tablename"];
-
-                    MessageHandler<Dictionary<string, string>> handler = new MessageHandler<Dictionary<string, string>>(qmessage)
-                    {
-                        ReceiveHandler = new Func<Dictionary<string, string>, Dictionary<string, string>>(QueueRepository.GetTable),
-                        ResponseHandler = (session, resultDict) =>
-                        {
-                            // Send response to client
-                            if (resultDict != null)
-                            {
-                                string totalRow  = resultDict["totalrow"];
-                                string jsonTable = resultDict["jsontable"];
-
-                                //if (string.IsNullOrWhiteSpace(jsonTable))
-                                //    return;
-
-                                // SYS|GET_TABLE|RES|Identifier|[Table!Result!TotalRow]
-                                string message = Msg.SysGetTable.Text +
-                                                 Msg.Separator + "RES" +
-                                                 Msg.Separator + "Identifier" +
-                                                 Msg.Separator + tableName +
-                                                 Msg.CompDelimiter + jsonTable +
-                                                 Msg.CompDelimiter + totalRow;
 
                                 session.Send(message);
                             }
