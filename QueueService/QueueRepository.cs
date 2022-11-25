@@ -1062,7 +1062,7 @@ namespace Tobasa
                     {
                         sql += " WHERE stations.name LIKE '%CALL%' ";
                     }
-                    sql += "ORDER BY stations.name";
+                    sql += " ORDER BY stations.name";
                     sql += Database.Me.GetOffsetLimit(offset, limit);
 
                     Database.Me.OpenConnection();
