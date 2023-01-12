@@ -85,7 +85,7 @@ namespace Tobasa.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("tobasaqueue")]
+        [global::System.Configuration.DefaultSettingValueAttribute("admin")]
         public string QueueUserName {
             get {
                 return ((string)(this["QueueUserName"]));
@@ -97,7 +97,7 @@ namespace Tobasa.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("e4ee0e54215f5e3dd7683923abe1dac8")]
+        [global::System.Configuration.DefaultSettingValueAttribute("adminOke123")]
         public string QueuePassword {
             get {
                 return ((string)(this["QueuePassword"]));

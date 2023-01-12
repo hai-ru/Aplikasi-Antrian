@@ -89,6 +89,9 @@ namespace Tobasa
             lblNumber.Text   = "";
             _curNumber       = "";
 
+            textBox1.Text = _settings.QueueUserName;
+            textBox2.Text = _settings.QueuePassword;
+
             // Populate cbPost
             string[] cbPostItems = UIPostListToArray();
             cbPost.Items.Clear();
@@ -123,7 +126,7 @@ namespace Tobasa
             }
 
             // get last queue status from server
-            GetQueuetInfo();
+            //GetQueuetInfo();
         }
 
         #endregion
@@ -166,8 +169,10 @@ namespace Tobasa
             {
                 _client.Session.DataReceived += new DataReceived(NetSessionDataReceived);
 
-                string clearPwd     = Util.DecryptPassword(_settings.QueuePassword, _settings.SecuritySalt);
-                string passwordHash = Util.GetPasswordHash(clearPwd, _settings.QueueUserName);
+                //string clearPwd     = Util.DecryptPassword(_settings.QueuePassword, _settings.SecuritySalt);
+                //string passwordHash = Util.GetPasswordHash(clearPwd, _settings.QueueUserName);
+
+                string passwordHash = _settings.QueuePassword;
 
                 // SYS|LOGIN|REQ|[Module!Post!Station!Username!Password]
                 string message =
@@ -299,6 +304,9 @@ namespace Tobasa
                     if (result == "OK")
                     {
                         lblStatus.Text = "Connected to Server : " + _client.Session.RemoteInfo + " - Post :" + _settings.StationPost + "  Station:" + _settings.StationName;
+
+                        GetQueuetInfo();
+
                         Logger.Log("[QueueCaller] Successfully logged in");
                     }
                     else
@@ -309,7 +317,7 @@ namespace Tobasa
                         Logger.Log(msg);
                         MessageBox.Show(this, msg, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                        CloseConnection();
+                        //CloseConnection();
                     }
                 }
                 // Handle CallerGetInfo, CallerGetNext
@@ -434,7 +442,10 @@ namespace Tobasa
                 _client.Send(message);
             }
             else
-                Util.ShowConnectionError(this);
+            {
+
+                //Util.ShowConnectionError(this);
+            }
         }
 
         private void GetNextNumber()
@@ -809,6 +820,9 @@ namespace Tobasa
             _settings.StationPost = cbPost.Text;
             _settings.QueueServerHost = tbServer.Text;
             _settings.QueueServerPort = Convert.ToInt32(tbPort.Text);
+
+            _settings.QueueUserName= textBox1.Text;
+            _settings.QueuePassword = textBox2.Text;
 
             _settings.ShowPostsButtonDiv = chkShowSwitchPostsButtons.Checked;
             _settings.ManageAdvanceQueue = chkManageAdvanceQueue.Checked;

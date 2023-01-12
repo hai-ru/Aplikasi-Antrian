@@ -60,6 +60,7 @@ namespace Tobasa
             this.capNext = new System.Windows.Forms.Label();
             this.lblStation = new System.Windows.Forms.Label();
             this.lblPost = new System.Windows.Forms.Label();
+            this.lblQueueCount = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnCall = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -80,6 +81,8 @@ namespace Tobasa
             this.btnChangePost7 = new System.Windows.Forms.Button();
             this.btnChangePost8 = new System.Windows.Forms.Button();
             this.btnChangePost9 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnRefreshing = new System.Windows.Forms.Button();
             this.tabProcessing = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
@@ -110,9 +113,10 @@ namespace Tobasa
             this.tbServer = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.lblQueueCount = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnRefreshing = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.mainTab.SuspendLayout();
             this.tabPageMain.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -121,6 +125,7 @@ namespace Tobasa
             this.tableLayoutPanel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.postsBtnDiv.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.tabProcessing.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridJobs)).BeginInit();
             this.tabFinished.SuspendLayout();
@@ -128,7 +133,6 @@ namespace Tobasa
             this.tabOptions.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbConnProps.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblStatus
@@ -299,6 +303,22 @@ namespace Tobasa
             this.lblPost.Text = "POST1";
             this.lblPost.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblPost.Resize += new System.EventHandler(this.OnLabelResize);
+            // 
+            // lblQueueCount
+            // 
+            this.lblQueueCount.AutoSize = true;
+            this.lblQueueCount.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.lblQueueCount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblQueueCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQueueCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblQueueCount.Location = new System.Drawing.Point(464, 87);
+            this.lblQueueCount.Margin = new System.Windows.Forms.Padding(0);
+            this.lblQueueCount.Name = "lblQueueCount";
+            this.lblQueueCount.Size = new System.Drawing.Size(152, 63);
+            this.lblQueueCount.TabIndex = 20;
+            this.lblQueueCount.Text = "0";
+            this.lblQueueCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblQueueCount.Resize += new System.EventHandler(this.OnLabelResize);
             // 
             // panel2
             // 
@@ -583,6 +603,31 @@ namespace Tobasa
             this.btnChangePost9.UseVisualStyleBackColor = true;
             this.btnChangePost9.Click += new System.EventHandler(this.OnChangePost);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnRefreshing);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(201, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(260, 49);
+            this.panel1.TabIndex = 25;
+            // 
+            // btnRefreshing
+            // 
+            this.btnRefreshing.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnRefreshing.BackColor = System.Drawing.Color.AliceBlue;
+            this.btnRefreshing.BackgroundImage = global::Tobasa.Properties.Resources.lblgreen;
+            this.btnRefreshing.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnRefreshing.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefreshing.ForeColor = System.Drawing.Color.MintCream;
+            this.btnRefreshing.Location = new System.Drawing.Point(0, 0);
+            this.btnRefreshing.Name = "btnRefreshing";
+            this.btnRefreshing.Size = new System.Drawing.Size(260, 49);
+            this.btnRefreshing.TabIndex = 0;
+            this.btnRefreshing.Text = "Refresh";
+            this.btnRefreshing.UseVisualStyleBackColor = false;
+            this.btnRefreshing.Click += new System.EventHandler(this.btnRefreshing_Click);
+            // 
             // tabProcessing
             // 
             this.tabProcessing.BackColor = System.Drawing.SystemColors.Window;
@@ -768,7 +813,7 @@ namespace Tobasa
             this.tabOptions.Location = new System.Drawing.Point(4, 22);
             this.tabOptions.Name = "tabOptions";
             this.tabOptions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabOptions.Size = new System.Drawing.Size(671, 423);
+            this.tabOptions.Size = new System.Drawing.Size(671, 442);
             this.tabOptions.TabIndex = 3;
             this.tabOptions.Text = "Options";
             this.tabOptions.UseVisualStyleBackColor = true;
@@ -831,6 +876,10 @@ namespace Tobasa
             // 
             // gbConnProps
             // 
+            this.gbConnProps.Controls.Add(this.textBox2);
+            this.gbConnProps.Controls.Add(this.textBox1);
+            this.gbConnProps.Controls.Add(this.label6);
+            this.gbConnProps.Controls.Add(this.label1);
             this.gbConnProps.Controls.Add(this.lblCtrNoChar);
             this.gbConnProps.Controls.Add(this.label2);
             this.gbConnProps.Controls.Add(this.cbPost);
@@ -845,7 +894,7 @@ namespace Tobasa
             this.gbConnProps.Controls.Add(this.label4);
             this.gbConnProps.Location = new System.Drawing.Point(15, 16);
             this.gbConnProps.Name = "gbConnProps";
-            this.gbConnProps.Size = new System.Drawing.Size(254, 285);
+            this.gbConnProps.Size = new System.Drawing.Size(254, 382);
             this.gbConnProps.TabIndex = 24;
             this.gbConnProps.TabStop = false;
             this.gbConnProps.Text = "Connection Properties";
@@ -937,7 +986,7 @@ namespace Tobasa
             // btnSaveReconnect
             // 
             this.btnSaveReconnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSaveReconnect.Location = new System.Drawing.Point(116, 233);
+            this.btnSaveReconnect.Location = new System.Drawing.Point(116, 330);
             this.btnSaveReconnect.Name = "btnSaveReconnect";
             this.btnSaveReconnect.Size = new System.Drawing.Size(119, 33);
             this.btnSaveReconnect.TabIndex = 16;
@@ -981,46 +1030,37 @@ namespace Tobasa
             this.label4.TabIndex = 18;
             this.label4.Text = "Port";
             // 
-            // lblQueueCount
+            // label1
             // 
-            this.lblQueueCount.AutoSize = true;
-            this.lblQueueCount.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.lblQueueCount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblQueueCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQueueCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblQueueCount.Location = new System.Drawing.Point(464, 87);
-            this.lblQueueCount.Margin = new System.Windows.Forms.Padding(0);
-            this.lblQueueCount.Name = "lblQueueCount";
-            this.lblQueueCount.Size = new System.Drawing.Size(152, 63);
-            this.lblQueueCount.TabIndex = 20;
-            this.lblQueueCount.Text = "0";
-            this.lblQueueCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblQueueCount.Resize += new System.EventHandler(this.OnLabelResize);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(26, 219);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "Username";
             // 
-            // panel1
+            // label6
             // 
-            this.panel1.Controls.Add(this.btnRefreshing);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(201, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(260, 49);
-            this.panel1.TabIndex = 25;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(26, 253);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(53, 13);
+            this.label6.TabIndex = 26;
+            this.label6.Text = "Password";
             // 
-            // btnRefreshing
+            // textBox1
             // 
-            this.btnRefreshing.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnRefreshing.BackColor = System.Drawing.Color.AliceBlue;
-            this.btnRefreshing.BackgroundImage = global::Tobasa.Properties.Resources.lblgreen;
-            this.btnRefreshing.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnRefreshing.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefreshing.ForeColor = System.Drawing.Color.MintCream;
-            this.btnRefreshing.Location = new System.Drawing.Point(0, 0);
-            this.btnRefreshing.Name = "btnRefreshing";
-            this.btnRefreshing.Size = new System.Drawing.Size(260, 49);
-            this.btnRefreshing.TabIndex = 0;
-            this.btnRefreshing.Text = "Refresh";
-            this.btnRefreshing.UseVisualStyleBackColor = false;
-            this.btnRefreshing.Click += new System.EventHandler(this.btnRefreshing_Click);
+            this.textBox1.Location = new System.Drawing.Point(103, 219);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(109, 20);
+            this.textBox1.TabIndex = 27;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(103, 253);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(109, 20);
+            this.textBox2.TabIndex = 28;
             // 
             // MainForm
             // 
@@ -1048,6 +1088,7 @@ namespace Tobasa
             this.tableLayoutPanel1.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.postsBtnDiv.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.tabProcessing.ResumeLayout(false);
             this.tabProcessing.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridJobs)).EndInit();
@@ -1059,7 +1100,6 @@ namespace Tobasa
             this.groupBox1.PerformLayout();
             this.gbConnProps.ResumeLayout(false);
             this.gbConnProps.PerformLayout();
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1129,6 +1169,10 @@ namespace Tobasa
         private System.Windows.Forms.Label lblQueueCount;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnRefreshing;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label1;
     }
 }
 

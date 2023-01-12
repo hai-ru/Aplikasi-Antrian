@@ -18,10 +18,10 @@
       <Value Profile="(Default)">C4BC3A3AC2D6D367A74580388B20BC069C96B048DFEAF5CCDC0CE1E25BF23F39</Value>
     </Setting>
     <Setting Name="QueueUserName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">tobasaqueue</Value>
+      <Value Profile="(Default)">admin</Value>
     </Setting>
     <Setting Name="QueuePassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)">e4ee0e54215f5e3dd7683923abe1dac8</Value>
+      <Value Profile="(Default)">adminOke123</Value>
     </Setting>
     <Setting Name="ManageAllPostAdvanceQueue" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
